@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ucapan ulang tahun untuk Delia Ariza Putri">
+    <title>Selamat Ulang Tahun Delia!</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <!-- Halaman Pertama -->
+    <div class="landing-page">
+        <h1>🎵 Puter Sek Musike Sayang 🎵</h1>
+        <div class="Delia-muah">
+            <img src="assets/images/photo1.jpg" alt="Delia cantik" class="deliafirst">
+        </div>
+        <button onclick="playMusic()">Play Musik</button>
+        <button onclick="stopMusic()">Stop Musik</button>
+        <button id="proceedButton" disabled onclick="proceedToMainPage()">Nah Ayo Lanjut</button>
+        <footer>
+            <p>Iki nggawe dewe lho yang. Susah aku buat codinge. Heheheee...</p>
+            <p><a href="#">Eq Joya Dininggar</a> untuk Delia Ariza Putri 💖</p>
+        </footer>
+    </div>
+
+    <!-- Halaman Utama -->
+    <div id="main-content" style="display: none;">
+        <div class="container">
+            <h1>🎉 Selamat Ulang Tahun, Delia Ariza Putri! 🎉</h1>
+            <p>Hari ini, 25 Desember 2024, kamu genap berusia 20 tahun! Semoga semua mimpi dan harapanmu terkabul. 🎂</p>
+            <p>Dengan penuh cinta,</p>
+            <p><strong>Eq Joya Dininggar</strong></p>
+
+            <!-- Container untuk gambar kue -->
+            <div class="image-container">
+                <img src="assets/images/fotokue.png" alt="Gambar kue ulang tahun" class="cake-img">
+            </div>
+
+            <!-- Tombol Kejutan -->
+            <div class="button-container">
+                <button onclick="showSurprise()">Klik untuk Kejutan 🎁</button>
+                <button onclick="goToUploadPage()">Upload Foto 📸</button>
+            </div>
+        </div>
+
+        <!-- Slider Foto -->
+        <div class="slider">
+            <div class="slides">
+                <img src="assets/images/photo1.jpg" alt="Delia cantik">
+                <img src="assets/images/photo2.jpg" alt="Deliaku sayang">
+                <img src="assets/images/photo3.jpg" alt="Delia pinter">
+                <img src="assets/images/photo4.jpg" alt="Delia muahmuahh">
+            </div>
+        </div>
+
+        <!-- Background Music -->
+        <audio id="birthdayMusic" loop>
+            <source src="assets/music/Selamat Ulang Tahun.mp3" type="audio/mpeg">
+            Maaf, browser kamu tidak mendukung audio.
+        </audio>
+
+        <!-- Footer -->
+        <footer>
+            <p>I LOVE YOU SAYAAAANNGGGG!!!!!</p>
+            <p><a href="#">Eq Joya Dininggar</a> untuk Delia Ariza Putri 💖</p>
+        </footer>
+    </div>
+
+    <!-- Halaman Upload Gambar -->
+    <div id="upload-page" style="display: none;">
+        <div class="upload-container">
+            <h1>PAP ekspresimu pas liat iki yang 📸</h1>
+            <p>PAP anu juga boleehhh! hehehee....</p>
+            <div class="preview-container" id="previewContainer" style="display: none;">
+                <h3>Pratinjau Gambar:</h3>
+                <img id="uploadedImage" alt="Pratinjau Gambar" class="uploaded-img">
+            </div>
+            <button onclick="goToMainPage()">Kembali ke Halaman Utama</button>
+        </div>
+        <form id="uploadForm" enctype="multipart/form-data" action="http://localhost:3000/upload" method="POST">
+            <label for="imageUpload">Pilih Foto:</label>
+            <input type="file" id="imageUpload" name="file" accept="image/*" required>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+
+    <script>
+        function playMusic() {
+            const music = document.getElementById('birthdayMusic');
+            music.play();
+            document.getElementById('proceedButton').disabled = false;
+        }
+
+        function stopMusic() {
+            const music = document.getElementById('birthdayMusic');
+            music.pause();
+            music.currentTime = 0; // Reset ke awal musik
+        }
+
+        function proceedToMainPage() {
+            document.querySelector('.landing-page').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+        }
+
+        function showSurprise() {
+            alert('Selamat ulang tahun, Delia! 🎉 Semoga harimu indah!');
+        }
+
+        function previewImage(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const previewContainer = document.getElementById('previewContainer');
+                    const uploadedImage = document.getElementById('uploadedImage');
+                    uploadedImage.src = e.target.result;
+                    previewContainer.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function goToUploadPage() {
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('upload-page').style.display = 'block';
+        }
+
+        function goToMainPage() {
+            document.getElementById('upload-page').style.display = 'none';
+            document.getElementById('main-content').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
